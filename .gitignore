@@ -1,0 +1,8 @@
+.idea
+.env
+.env-db
+.DS_Store
+env
+*.pyc
+media
+staticfiles
