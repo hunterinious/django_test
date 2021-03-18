@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            User post list
+        </div>
+        <div class="card-body">
+            {% for p in user_post_list %}
+                <div class="row">
+                     <div class="col-4">
+                        <p>
+                            {{ p.theme }}
+                        </p>
+                         <p>
+                            {{ p.description }}
+                        </p>
+                         <img src="{{ p.picture.url }}">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

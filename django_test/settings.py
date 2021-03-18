@@ -57,6 +57,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'django_test.urls'
 
 LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('post-list')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 TEMPLATES = [
