@@ -26,6 +26,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser, PermissionsMixin):
+    username = None
     email = models.EmailField(max_length=60, unique=True)
     is_superuser = models.BooleanField(default=False)
 
