@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Delete the Post
+        </div>
+        <div class="card-body">
+            <form method="post">{% csrf_token %}
+                <h1>Do you want to delete the post "{{ post.theme }}"?</h1>
+                <p><input type="submit" value="Yes" /> <a href="{% url 'post-list' %}">Cancel</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

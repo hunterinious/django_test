@@ -1,10 +1,23 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import (
+    CreateView,
+    ListView,
+    UpdateView,
+    DeleteView
+)
+from django.views import View
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from .forms import PostForm
 from .models import Post
+
+
+class AdminOnlyView(LoginRequiredMixin, UserPassesTestMixin, View):
+    permission_denied_message = 'Only admin has access to this view'
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -36,6 +49,15 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('post-update', kwargs={'pk': self.kwargs['pk']})
+
+
+class PostDeleteView(AdminOnlyView, DeleteView):
+    model = Post
+    template_name = 'posts/post_delete.html'
+    context_object_name = 'post'
+
+    def get_success_url(self):
+        return reverse('post-list')
 
 
 class PostListView(ListView):
