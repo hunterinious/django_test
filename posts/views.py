@@ -8,7 +8,7 @@ from django.views.generic import (
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
-from .forms import PostForm
+from .forms import PostForm, ComemntForm
 from .models import Post
 from core.views import AdminOnlyView
 
@@ -57,3 +57,19 @@ class PostListView(ListView):
     model = Post
     template_name = 'posts/post_list.html'
     context_object_name = 'user_post_list'
+
+
+class CommentCreateView(CreateView):
+    form_class = ComemntForm
+    template_name = 'posts/comments/comment_create.html'
+
+    def form_valid(self, form):
+        post_id = self.kwargs.get("post_id")
+        post = get_object_or_404(Post, id=post_id)
+        if form.is_valid():
+            form.instance.post = post
+            form.save()
+        return super(CommentCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('post-list')

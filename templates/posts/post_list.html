@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="container">
+
     <div class="card">
         <div class="card-header">
             User post list
@@ -30,6 +31,26 @@
                           <a href="{% url 'post-delete' p.id %}" >
                                 <i class="far fa-trash-alt fa-lg"></i>
                           </a>
+                        </div>
+                        <div class="col-1 mt-2 mb-4">
+                          <a href="{% url 'comment-create' p.id %}" >
+                                <i class="fas fa-comment fa-lg"></i>
+                          </a>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                         <div class="col-4">
+                             {% for c in p.comment_set.all %}
+                             <div class="card">
+                                    <p>
+                                       {{ p.user }}
+                                    </p>
+                                    <p>
+                                        {{ c.text }}
+                                    </p>
+                             </div>
+                             {% endfor %}
                         </div>
                     </div>
                 </div>
