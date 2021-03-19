@@ -10,4 +10,3 @@ class Post(models.Model):
     description = models.TextField(null=False, blank=False)
     picture = models.ImageField(upload_to="post_pictures", null=False, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-

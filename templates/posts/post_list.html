@@ -8,15 +8,24 @@
         </div>
         <div class="card-body">
             {% for p in user_post_list %}
-                <div class="row">
-                     <div class="col-4">
-                        <p>
-                            {{ p.theme }}
-                        </p>
-                         <p>
-                            {{ p.description }}
-                        </p>
-                         <img src="{{ p.picture.url }}">
+                <div class="card">
+                    <div class="row">
+                         <div class="col-4">
+                            <p>
+                                {{ p.theme }}
+                            </p>
+                             <p>
+                                {{ p.description }}
+                            </p>
+                             <img src="{{ p.picture.url }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 mt-2 mb-4">
+                          <a href="{% url 'post-update' p.id %}" >
+                                <i class="fas fa-edit fa-lg"></i>
+                          </a>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
