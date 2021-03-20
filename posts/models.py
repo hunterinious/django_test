@@ -11,6 +11,9 @@ class Post(models.Model):
     picture = models.ImageField(upload_to="post_pictures", null=False, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.theme
+
 
 class Comment(models.Model):
     text = models.TextField(null=False, blank=False)
