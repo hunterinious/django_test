@@ -8,8 +8,7 @@ class PostAdmin(admin.ModelAdmin):
 
     def response_change(self, request, obj):
         if "comments-delete" in request.POST:
-            obj.comment_set.all().delete()
-            obj.save()
+            Post.objects.delete_related_comments(obj)
             self.message_user(request, "All comments deleted")
             return HttpResponseRedirect(".")
         return super().response_change(request, obj)
