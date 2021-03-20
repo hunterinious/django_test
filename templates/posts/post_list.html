@@ -2,10 +2,18 @@
 
 {% block content %}
 <div class="container">
+
     <div class="card">
         <div class="card-header">
             User post list
         </div>
+
+        <div class="row justify-content-md-srart ml-2 mt-2">
+            <button type="button" class="btn btn-link">
+                <a href="{% url 'post-create'%}">Add post</a>
+            </button>
+        </div>
+
         <div class="card-body">
             {% for p in user_post_list %}
                 <div class="card">
