@@ -6,14 +6,3 @@ services:
        - "5432:5432"
      image: postgres:13-alpine
      env_file: .env-db
-   web:
-     build:
-       context: .
-     command: gunicorn --bind 0.0.0.0:8000 django_test.wsgi
-     env_file: .env
-     volumes:
-       - .:/django_test
-     ports:
-       - "8000:8000"
-     depends_on:
-       - db

@@ -15,7 +15,7 @@
         </div>
 
         <div class="card-body">
-            {% for p in user_post_list %}
+            {% for p in posts %}
                 <div class="card">
                     <div class="row ml-2 mt-2">
                          <div class="col-11">
@@ -52,7 +52,7 @@
 
                      <div class="row ml-2 mb-2">
                          <div class="col-11">
-                             {% for c in p.comment_set.all %}
+                             {% for c in p.comments.all %}
                              <div class="card">
                                     <p>
                                        {{ p.user }}

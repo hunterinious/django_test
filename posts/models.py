@@ -7,7 +7,7 @@ User = get_user_model()
 
 class PostManager(models.Manager):
     def delete_related_comments(self, post):
-        post.comment_set.all().delete()
+        post.comments.all().delete()
         post.save()
 
 
@@ -15,7 +15,7 @@ class Post(models.Model):
     theme = models.CharField(max_length=100, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     picture = models.ImageField(upload_to="post_pictures", null=False, blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
 
     objects = PostManager()
 
@@ -25,4 +25,4 @@ class Post(models.Model):
 
 class Comment(models.Model):
     text = models.TextField(null=False, blank=False)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
