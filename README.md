@@ -1,5 +1,4 @@
-git # Django Test
-
+# Django Test
 
 ## Setup virtual environment
 
