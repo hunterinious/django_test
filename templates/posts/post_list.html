@@ -22,16 +22,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-1 mt-2 mb-4">
-                          <a href="{% url 'post-update' p.id %}" >
-                                <i class="fas fa-edit fa-lg"></i>
-                          </a>
-                        </div>
-                        <div class="col-1 mt-2 mb-4">
-                          <a href="{% url 'post-delete' p.id %}" >
-                                <i class="far fa-trash-alt fa-lg"></i>
-                          </a>
-                        </div>
+                        {% if request.user == p.user %}
+                            <div class="col-1 mt-2 mb-4">
+                              <a href="{% url 'post-update' p.id %}" >
+                                    <i class="fas fa-edit fa-lg"></i>
+                              </a>
+                            </div>
+                        {% endif %}
+                        {% if request.user.is_superuser %}
+                            <div class="col-1 mt-2 mb-4">
+                              <a href="{% url 'post-delete' p.id %}" >
+                                    <i class="far fa-trash-alt fa-lg"></i>
+                              </a>
+                            </div>
+                        {% endif %}
                         <div class="col-1 mt-2 mb-4">
                           <a href="{% url 'comment-create' p.id %}" >
                                 <i class="fas fa-comment fa-lg"></i>
